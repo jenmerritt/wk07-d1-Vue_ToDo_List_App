@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>ToDo List</title>
-    <script src="./js/bundle.js"></script>
-  </head>
-  <body>
-    <div id="app">
-
-    </div>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <title>ToDo List App</title>
+  <script src="./js/bundle.js"></script>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+  <h1>My ToDo List</h1>
+  <hr>
+  <div id="app">
+    <form v-on:submit.prevent="saveNewToDo">
+      <input id="new-todo" type="text" v-model="newToDo.description" placeholder="Add ToDo..." required />
+      <label for="priority"><input type="radio" name="priority" value="high" checked v-model="newToDo.priority" />   High</label>
+      <label for="priority"><input type="radio" name="priority" value="low" v-model="newToDo.priority" />   Low</label>
+      <input type="submit" value="Add to list" />
+    </form>
+    <ul>
+      <li v-for="(toDo, index) in toDoList" v-bind:class="toDo.priority === 'high' ? 'high' : 'low'">
+        <span>{{ toDo.description }}</span>
+      </li>
+    </ul>
+  </div>
+</body>
 </html>
